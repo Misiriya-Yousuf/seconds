@@ -1,0 +1,182 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login and Register</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+            font-family: 'Arial', sans-serif;
+        }
+
+        /* Background image */
+        .image-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
+
+        /* Form container */
+        .form-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+            max-width: 450px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Heading style */
+        .form-container h2 {
+            text-align: center;
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        /* Input fields */
+        .form-container input {
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 20px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+            transition: border-color 0.3s ease-in-out;
+        }
+
+        .form-container input:focus {
+            border-color: #007bff;
+            outline: none;
+            background-color: #fff;
+        }
+
+        /* Button style */
+        .form-container button {
+            width: 100%;
+            padding: 15px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        .form-container button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Toggle between login and register */
+        .toggle-form {
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .toggle-form a {
+            color: #007bff;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .toggle-form a:hover {
+            color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Image -->
+    <img class="image-background" src="{% static 'images/slider-bg.jpg' %}" alt="Background Image">
+
+    <!-- Navbar Header -->
+    <header class="header_section">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="{% url 'home' %}">
+                <span style="font-size: 18px; margin-left:8px;  color: purple;">Signature Seconds</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item ">
+                        <a class="nav-link" href="{% url 'home' %}"><b>Home</b></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'products' %}"><b>Products</b></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'cart' %}">
+                            <b>Cart</b><i class="fa fa-shopping-cart" aria-hidden="true"style="margin-left: 5px;"></i>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'account' %}"><b>User</b> <i class="fa fa-user" aria-hidden="true"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <!-- Login and Register Forms -->
+    <div class="form-container">
+        <!-- Login form -->
+        <div class="form-section" id="login-form">
+            <h4><b>Login</b></h4>
+            <input type="email" placeholder="Email" required>
+            <input type="password" placeholder="Password" required>
+            <button type="submit">Login</button>
+            <div class="toggle-form">
+                <a href="#" onclick="toggleForm()">Don't have an account? Register here</a>
+            </div>
+        </div>
+
+        <!-- Register form (initially hidden) -->
+        <div class="form-section" id="register-form" style="display:none;">
+            <h6><b>Register</b></h6>
+            <input type="text" placeholder="Full Name" required>
+            <input type="email" placeholder="Email" required>
+            <input type="password" placeholder="Password" required>
+            <input type="password" placeholder="Confirm Password" required>
+            <button type="submit">Register</button>
+            <div class="toggle-form">
+                <a href="#" onclick="toggleForm()">Already have an account? Login here</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleForm() {
+            var loginForm = document.getElementById("login-form");
+            var registerForm = document.getElementById("register-form");
+
+            if (loginForm.style.display === "none") {
+                loginForm.style.display = "block";
+                registerForm.style.display = "none";
+            } else {
+                loginForm.style.display = "none";
+                registerForm.style.display = "block";
+            }
+        }
+    </script>
+</body>
+</html>
